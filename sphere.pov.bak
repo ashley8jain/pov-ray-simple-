@@ -1,0 +1,79 @@
+#version 3.7;
+global_settings {  assumed_gamma 1.0 }
+
+camera{ ultra_wide_angle
+        angle 75
+        right x*image_width/image_height
+        location  <0.0 , 1.0 ,-3.0>
+        look_at   <0.0 , 0.0 , 0.0>
+         
+           rotate < 0,360*clock,0>
+          }
+
+light_source{ <1500,2500,-2500>
+              color rgb<1,1,1> }
+
+sky_sphere{ pigment{color rgb<3.2,0.2,0.3>}}
+
+
+sphere{ <0,0,0>, 0.45
+         material{
+          texture { pigment{ color rgbt<0.9,0,1,0>}
+                 
+                      finish { diffuse 0.1
+           reflection 0.2
+           specular 0.5
+           roughness 0.03
+           }
+                  }   
+                  
+          interior{ ior 1.5
+                 
+                  } 
+               
+               }
+        translate < 0, 0, 0>
+        
+       }  
+sphere{  <0,0,1>,0.15
+            texture { pigment{ rgb<5,0.6,0.1> }
+                  }
+                  translate<0,-0.3,0>
+                } 
+prism {
+    conic_sweep
+    linear_spline
+    0, // height 1
+    1, // height 2
+    5, // the number of points making up the shape...
+    <4,4><-4,4>,<-4,-4>,<4,-4>,<4,4>
+    rotate <180, 0, 0>
+    translate <-20, 1, 0>
+    scale <0.1, 0.5, 0.1>
+    pigment { 
+               color rgbt<0.3,0,1,0> }  
+               translate<0,-0.5,0>
+  }
+                      
+box {<0, 0,0>,< 0.5, 0.5,0.5>
+          pigment {  rgb<1,0,0> }
+   translate <2,-0.5,0>
+  }        
+  
+cone {
+    <1, 1.5, 0>, 0    // Center and radius of one end
+    <1, 0, 0>, 0.7    // Center and radius of other end
+          pigment {  rgb<0,1,0> }  
+          translate<0,-1,-1>
+} 
+
+
+box {<-3.00,0.01,-2.00>,<3.50,0.05,3.00>
+       texture{ pigment{ checker
+                         color rgb<1,1,1>
+                         color rgb<0,0,0>}  
+                         scale 0.25*4
+              } // end of texture
+  translate<0,-0.5,0>
+  
+    }
